@@ -6,10 +6,18 @@ const archiveBtn = document.querySelector('.archive');
 const stopwatch = document.querySelector('.stopwatch');
 const time = document.querySelector('.time');
 const timeList = document.querySelector('.time-list');
-
-const infoBtn = document.querySelector('.info');
 const closeModalBtn = document.querySelector('.close');
 const modalShadow = document.querySelector('.modal-shadow');
+const infoBtn = document.querySelector('.fa-question');
+const brushBtn = document.querySelector('.fa-brush');
+const colors = document.querySelector('.colors');
+const redColorBtn = document.querySelector('.color-red');
+const greenColorBtn = document.querySelector('.color-green');
+const blueColorBtn = document.querySelector('.color-blue');
+
+const redRGBColor = 'rgb(250, 20, 0)';
+const greenRGBColor = 'rgb(0, 250, 20)';
+const blueRGBColor = 'rgb(0, 150, 250)';
 
 let countTime = 0;
 let minutes = 0;
@@ -22,7 +30,7 @@ const handleStart = () => {
 	countTime = setInterval(() => {
 		seconds++;
 		setTime(stopwatch);
-	}, 100);
+	}, 1000);
 };
 
 const setTime = (input) => {
@@ -59,6 +67,7 @@ const handleReset = () => {
 	clear();
 	timesArr = [];
 	time.style.visibility = '';
+	colors.classList.remove('show-colors');
 };
 
 const clear = () => {
@@ -86,6 +95,19 @@ const showModal = () => {
 	}
 	modalShadow.classList.toggle('modal-animation');
 };
+
+const showColors = () => {
+	colors.classList.toggle('show-colors');
+};
+
+const changeColor = (color) => {
+	document.documentElement.style.setProperty('--first-color', color);
+};
+
+brushBtn.addEventListener('click', showColors);
+redColorBtn.addEventListener('click', () => changeColor(redRGBColor));
+greenColorBtn.addEventListener('click', () => changeColor(greenRGBColor));
+blueColorBtn.addEventListener('click', () => changeColor(blueRGBColor));
 
 startBtn.addEventListener('click', handleStart);
 pauseBtn.addEventListener('click', handlePause);
