@@ -24,13 +24,17 @@ let minutes = 0;
 let seconds = 0;
 
 let timesArr = [];
+let isStarded = true;
 
 const handleStart = () => {
-	clearInterval(countTime);
-	countTime = setInterval(() => {
-		seconds++;
-		setTime(stopwatch);
-	}, 1000);
+	if (isStarded) {
+		clearInterval(countTime);
+		countTime = setInterval(() => {
+			seconds++;
+			setTime(stopwatch);
+		}, 1000);
+	}
+	isStarded = false;
 };
 
 const setTime = (input) => {
@@ -51,6 +55,7 @@ const setTime = (input) => {
 
 const handlePause = () => {
 	clearInterval(countTime);
+	isStarded = true;
 };
 
 const handleStop = () => {
@@ -76,6 +81,7 @@ const clear = () => {
 	timeList.textContent = '';
 	minutes = 0;
 	seconds = 0;
+	isStarded = true;
 };
 
 const handleArchive = () => {
